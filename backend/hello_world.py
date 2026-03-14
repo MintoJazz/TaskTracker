@@ -1,15 +1,14 @@
 import psycopg2
 from dotenv import load_dotenv
-import os
+from os import getenv
+from persistencias import DAO
 
 load_dotenv()
 
-conn = psycopg2.connect(os.getenv("DB_URL"))
+connection = psycopg2.connect(getenv("DB_URL"))
 
-cur = conn.cursor()
+userDAO = DAO(table='usuario')
 
-cur.execute("SELECT * FROM usuario")
+records = userDAO.select_all(connection)
 
-records = cur.fetchall()
-
-print(records)
+for record in records: print(f'{record[0]} - Nome: {record[2]}')

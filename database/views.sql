@@ -1,0 +1,1 @@
+CREATE VIEW chamados AS SELECT * FROM 
