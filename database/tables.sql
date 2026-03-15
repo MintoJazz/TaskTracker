@@ -6,14 +6,23 @@ CREATE TYPE servico_registry AS ENUM ( --> expansível
 CREATE TYPE status_registry AS ENUM (
     'FINALIZADO',
     'CANCELADO',
-    'INICIADO'
+    'INICIADO',
+    'EM ATENDIMENTO',
+    'AGUARDANDO ATENDIMENTO'
+);
+
+CREATE TYPE role_registry AS ENUM (
+    'ADMIN',
+    'TECNICO',
+    'USER'
 );
 
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) UNIQUE,
     nome VARCHAR(100),
-    senha VARCHAR(100)
+    senha VARCHAR(100),
+    role role_registry DEFAULT 'USER'
 );
 
 CREATE TABLE tecnico (
@@ -36,5 +45,6 @@ CREATE TABLE atendimento (
     servico_id INTEGER REFERENCES servico(id),
     tecnico_id INTEGER REFERENCES tecnico(usuario_id),
     inicio_atendimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fim_atendimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fim_atendimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    descricao TEXT
 );

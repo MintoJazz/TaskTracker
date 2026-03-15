@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "frontend"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.next": true,
+      "**/node_modules": true
+    }
+  }
+}
